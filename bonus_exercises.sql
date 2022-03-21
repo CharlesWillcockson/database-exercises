@@ -21,6 +21,18 @@ LIMIT 1;
 
 # what is the highest employee number for an engineer?
 
-SELECT first_name, last_name, emp_no
+SELECT emp_no, title
+FROM titles
+ORDER BY emp_no DESC
+LIMIT 1;
+
+# what are the names of the 10 most recently hired employees who identified as female in the company? the first 10?
+
+SELECT first_name, last_name, hire_date, gender
 FROM employees
+WHERE gender = 'F'
+ORDER BY hire_date DESC
+LIMIT 10;
+
+# what is the most common birthday?
 
