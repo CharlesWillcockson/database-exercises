@@ -36,3 +36,42 @@ LIMIT 10;
 
 # what is the most common birthday?
 
+SELECT birth_date, COUNT(*)
+FROM employees
+GROUP BY birth_date
+LIMIT 1;
+
+# what is the most common  birthday for employees who identified as female? how about vs. those who identified as male?
+
+SELECT COUNT(*), birth_date
+FROM employees
+WHERE gender = 'F'
+GROUP BY birth_date
+LIMIT 1;
+
+SELECT COUNT(*), birth_date
+FROM employees
+WHERE gender = 'M'
+GROUP BY birth_date
+LIMIT 1;
+
+# what is the most common hire date for female and male employees?
+
+SELECT COUNT(*), hire_date
+FROM employees
+WHERE gender = 'F'
+GROUP BY hire_date
+LIMIT 1;
+
+SELECT COUNT(*), hire_date
+FROM employees
+WHERE gender = 'M'
+GROUP BY hire_date
+LIMIT 1;
+
+SELECT last_name, MAX(LENGTH(last_name)) AS letters, birth_date
+FROM employees
+WHERE birth_date = '1952-03-08'
+GROUP BY last_name
+ORDER BY 2 DESC
+LIMIT 1;
