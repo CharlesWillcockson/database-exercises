@@ -18,14 +18,53 @@ ORDER BY 2 DESC;
 
 # ### Problem 4
 # Display the first name, last name, and salary of the highest payed employee.
+SELECT first_name, last_name, MAX(salary)
+FROM employees
+JOIN salaries
+ON employees.emp_no = salaries.emp_no
+GROUP BY first_name, last_name
+ORDER BY MAX(salary) DESC
+LIMIT 1;
 # ### Problem 5
 # Display the first name, last name, and salary of the **second** highest payed employee.
+SELECT first_name, last_name, MAX(salary)
+FROM employees
+         JOIN salaries
+              ON employees.emp_no = salaries.emp_no
+GROUP BY first_name, last_name
+ORDER BY MAX(salary) DESC
+LIMIT 1 OFFSET 1;
 # ### Problem 6
 # Display the month and total hires for the month with the most hires.
+SELECT MAX(MONTH(hire_date)) AS month, COUNT(*) AS number_hired
+FROM employees
+GROUP BY MONTH(hire_date)
+ORDER BY 2 DESC
+LIMIT 1;
 # ### Problem 7
 # Display each department and the age of the youngest employee at hire date.
+SELECT dept_name, MIN(DATEDIFF(hire_date, birth_date)/365)
+FROM employees
+JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
+JOIN departments ON dept_emp.dept_no = departments.dept_no
+GROUP BY dept_name;
 # ### Problem 8
 # Find all the employees that do not contain vowels in their first name and display the department they work in.
+SELECT first_name, last_name, dept_name
+FROM employees JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
+JOIN departments ON dept_emp.dept_no = departments.dept_no
+WHERE first_name NOT LIKE '%a%'
+   AND first_name NOT LIKE '%e%'
+   AND first_name NOT LIKE '%i%'
+   AND first_name NOT LIKE '%o%'
+   AND first_name NOT LIKE '%u%'
+   AND first_name NOT LIKE '%A%'
+   AND first_name NOT LIKE '%E%'
+   AND first_name NOT LIKE '%I%'
+   AND first_name NOT LIKE '%O%'
+   AND first_name NOT LIKE '%U%'
+GROUP BY first_name, last_name, dept_name
+ORDER BY last_name;
 # ## Relationship Drills
 # - concat the max salaries of the first two employees
 # - get current manager name of Sales department (use subqueries)
