@@ -83,3 +83,7 @@ ORDER BY last_name;
 # - does the older half of current employees make more or less than the younger half?
 # - list the oldest current employees by title in each department
 # - list the 5 historically lowest paid managers
+
+SELECT *
+FROM employees
+LIMIT 5 OFFSET 10;
